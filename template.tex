@@ -10,7 +10,7 @@
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[ 9pt, english, xcolor=dvipsnames, aspectratio=43]{beamer}
+\documentclass[ 9pt, english, xcolor=dvipsnames, aspectratio=43,showframe=true]{beamer}
 %\usefonttheme{serif}
 % Text encoding
 \usepackage[english]{babel}
@@ -19,6 +19,7 @@
 \usepackage{dsfont}
 \usepackage{footbib}
 \usepackage{hyperref}
+\usepackage{appendixnumberbeamer}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{bm}
 \usepackage{makecell}
@@ -106,7 +107,7 @@
     \else
         \leavevmode
         \hbox{
-        \begin{beamercolorbox}[wd=.23\paperwidth,ht=2.6ex,dp=3ex,center]{palette quaternary}
+        \begin{beamercolorbox}[wd=.23\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
             \usebeamerfont{author in head/foot}\insertshortauthor\hspace*{1ex}
         \end{beamercolorbox}
         \begin{beamercolorbox}[wd=.53\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
@@ -200,7 +201,7 @@
     % Bicocca background has 1:1 proportion
     \usebackgroundtemplate{\tikz[remember picture,overlay] {\node[inner sep=0pt,opacity=0.2] at (current page.center)
         {\includegraphics[height=\paperheight,width=\paperwidth]{Background/Mondrian.jpg}};}}
-    \begin{frame}
+    \begin{frame}{}
         \vspace{-1.2cm}
         {\centering
         {\huge\textbf{\alert{Title here}}}\\[2mm]
@@ -228,7 +229,8 @@
 } % Close background bracket
 
 \section{Section 1}
-\begin{frame}
+\begin{frame}{}
+
     \begin{itemize}
         \item Some text
         \item Some text
@@ -238,7 +240,8 @@
 
 \section{Section 2}
 
-\begin{frame}
+\begin{frame}{}
+
         \begin{itemize}
         \item Some text
         \item Some text
@@ -261,8 +264,11 @@
 \setcounter{totalmainframes}{\value{framenumber}}
 \appendix
 \section{Backup}
+\begin{frame}{}
+	\Large{\texbf{\centering{Back Up}}}
+\end{frame}
+\begin{frame}{}
 
-\begin{frame}
 	Backup slides
 \end{frame}
 \end{document}
