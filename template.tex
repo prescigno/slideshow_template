@@ -106,7 +106,7 @@
     \else
         \leavevmode
         \hbox{
-        \begin{beamercolorbox}[wd=.23\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
+        \begin{beamercolorbox}[wd=.23\paperwidth,ht=2.6ex,dp=3ex,center]{palette quaternary}
             \usebeamerfont{author in head/foot}\insertshortauthor\hspace*{1ex}
         \end{beamercolorbox}
         \begin{beamercolorbox}[wd=.53\paperwidth,ht=2.6ex,dp=1ex,center]{palette quaternary}
@@ -257,4 +257,12 @@
     \end{itemize}
 \end{frame}
 
+\newcounter{totalmainframes}
+\setcounter{totalmainframes}{\value{framenumber}}
+\appendix
+\section{Backup}
+
+\begin{frame}
+	Backup slides
+\end{frame}
 \end{document}
