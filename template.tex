@@ -33,7 +33,11 @@
 \useinnertheme{circles}
 % If...else package
 \usepackage{ifthen}
-
+%The following is necessary to use enumitem (leftmargin...) with beamer
+\usepackage{enumitem}
+\setenumerate[itemize]{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
 % Package to set transparent background image
 \usepackage{tikz}
 
