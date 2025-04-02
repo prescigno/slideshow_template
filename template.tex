@@ -10,24 +10,31 @@
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[ 11pt, english, xcolor=dvipsnames, aspectratio=43,showframe=true]{beamer}
+\documentclass[ 11pt, english, xcolor=dvipsnames, aspectratio=169,showframe=true]{beamer}
 \usefonttheme[onlymath]{serif} %Text is beamer font, maths is serif
 % Text encoding
 \usepackage[english]{babel}
 \usepackage{physics}
-\usepackage{amsmath}
+\usepackage{amsmath,amsfonts}
 \usepackage{dsfont}
 \usepackage{footbib}
 \usepackage{hyperref}
+\usepackage{stackengine}
+%\hypersetup{
+%       colorlinks=true,
+%       linkcolor=links,
+%       urlcolor=links,
+%}
 \usepackage{appendixnumberbeamer}
 \usepackage[dvipsnames]{xcolor}
 \usepackage{bm}
 \usepackage{makecell}
+\usepackage{comment}
 % Justify text (package and function)
 % \apptocmd{command}{code}{success}{failure}
 \usepackage{ragged2e}
 \usepackage{dirtytalk}
-\apptocmd{\frame}{}{\justifying}{} 
+\apptocmd{\frame}{}{\justifying}{}
 % Justify text in \item
 \newcommand{\itemj}{\item \justifying}
 \useinnertheme{circles}
@@ -40,17 +47,18 @@
   \usebeamertemplate{itemize item}}
 % Package to set transparent background image
 \usepackage{tikz}
-
+\usepackage{tikz-feynman}
+\usetikzlibrary{shapes}
 % Include image package
 \usepackage{graphicx}
 % Set default path for images
 \graphicspath{ {./images/} }
 % Set figure number when included
 \setbeamertemplate{caption}[numbered]
-\newcommand{\Qquad}{\hspace{0.25em}} 
+\newcommand{\Qquad}{\hspace{0.25em}}
 % Bibliography packages
 \usepackage[style=authoryear,backend=bibtex]{biblatex}
-%\setbeamertemplate{bibliography item}{\insertbiblabel} 
+%\setbeamertemplate{bibliography item}{\insertbiblabel}
 \addbibresource{sample.bib}
 %\bibliographystyle{plainnat}
 \usepackage[absolute,overlay]{textpos}
@@ -59,15 +67,26 @@
 \definecolor{grey}{HTML}{708090} % secondary color
 \definecolor{blue}{rgb}{0,0,0.54}
 \definecolor{dgrey}{HTML}{1F3B4D}
+\definecolor{green}{rgb}{0.1,0.7,0.05}
 % Set theme palette colors
-\setbeamercolor{palette primary}{bg=red,fg=white}
-\setbeamercolor{palette secondary}{bg=red,fg=white}
-\setbeamercolor{palette tertiary}{bg=red,fg=white}
-\setbeamercolor{palette quaternary}{bg=red,fg=white}
+\setbeamercolor{palette primary}{bg=blue,fg=white}
+\setbeamercolor{palette secondary}{bg=dgrey,fg=white}
+\setbeamercolor{palette tertiary}{bg=grey,fg=white}
+\setbeamercolor{palette quaternary}{bg=grey,fg=white}
 % strucure means itemize, enumerate, etc
-\setbeamercolor{structure}{fg=red} 
+\setbeamercolor{structure}{fg=blue}
 
-\setbeamercolor{alerted text}{fg = red}
+% alert is magenta
+\setbeamercolor{alerted text}{fg=magenta}
+
+% green alert
+\newcommand{\galert}[1]{{\color{green} #1}}
+
+% blue alert
+\newcommand{\balert}[1]{{\color{blue} #1}}
+
+% strucure means itemize, enumerate, etc
+\setbeamercolor{structure}{fg=blue} 
 
 % Set bibliography colors
 \setbeamercolor{bibliography item}{fg=red}
@@ -86,11 +105,14 @@
 
 \setbeamertemplate{navigation symbols}{}
 
+% start from 0
+\addtocounter{framenumber}{-1}
+
 % Header with navigation bar
 \setbeamertemplate{headline}
 {
     
-    \ifnum \theframenumber=1  % Title frame 
+    \ifnum \theframenumber=0  % Title frame 
         %title frame:nothing  % without headline
     \else
       \setbeamerfont{section in head/foot}{size=\small}
@@ -106,7 +128,7 @@
 % Footer with custom caption
 \setbeamertemplate{footline}
 {
-    \ifnum \theframenumber=1    % Title Frame
+    \ifnum \theframenumber=0   % Title Frame
         %title frame: nothing   % without footline
     \else
         \leavevmode
@@ -200,68 +222,61 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Seminar / Talk title page
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{
 
-{ % This is to set local background
+ % This is to set local background
     % Bicocca background has 1:1 proportion
     \usebackgroundtemplate{\tikz[remember picture,overlay] {\node[inner sep=0pt,opacity=0.2] at (current page.center)
         {\includegraphics[height=\paperheight,width=\paperwidth]{Background/Mondrian.jpg}};}}
-    \begin{frame}{}
-        \vspace{-1.2cm}
-        {\centering
-        {\huge\textbf{\alert{Title here}}}\\[2mm]
-        {\textbf{Speaker}}$^{a,b}$\\[2mm]}
-        \hline\\[2mm]
-        Tizio$^{\textit{a},b}$, Caio$^{a,b}$, Sempronio$^{c}$\\[3mm]
-        \hspace{\hskip} \textit{$^a$ U.S. Robots and Mechanical Men, Inc.}\\
-        \hspace{\parindent} \textit{$^b$ Aperture Science Enrichment Centre}\\
-        \hspace{\parindent} \textit{$^c$ Black Mesa}\\
+\begin{frame} 
+        %\vspace{-1.2cm}
+        \centerline{\huge\textbf{Title of the presentation}}\vspace{5mm}
+	\centerline{\Large{Pietro Rescigno}}\vspace{2mm}
+	\centerline{\large University of Milano-Bicocca, INFN Milano-Bicocca}\vspace{5mm}
+	\centerline{\large In collaboration with:}\vspace{2mm}
+	\centerline{\large Tizio, Caio, Sempronio}\vspace{3mm}
+	\centerline{Seminar, place, date}
 
         %% Logos go here %%
-        \begin{textblock*}{5cm}(1.1cm,6.55cm)
-            \includegraphics[scale=0.025]{logos/Bicocca_transparent.png}
+	% Logos here
+        \begin{textblock*}{4cm}(1.5cm,6.5cm)
+            \includegraphics[width=0.6\textwidth]{logos/Bicocca_transparent.png}
         \end{textblock*}
-        \begin{textblock*}{5cm}(2.4cm,6.6cm)
-            \includegraphics[scale=0.15]{logos/1_MILANOB_LOGO_SIGLA.pdf}
+        \begin{textblock*}{5cm}(4.2cm,6.6cm)
+            \includegraphics[width=\textwidth]{logos/1_MILANOB_LOGO_SIGLA.pdf}
         \end{textblock*}
-        % Extra logos (Conference)
-        %\begin{textblock*}{5cm}(8.2cm,6.9cm)
-        %        \includegraphics[scale=0.15]{logos/Lattice23logo.png}
+        \begin{textblock*}{5cm}(9.1cm,5.7cm)
+            \includegraphics[width=1.3\textwidth]{logos/logo_icsc_transparent.pdf}
+        \end{textblock*}
+        
+	% Extra logos (Conference)
+        %\begin{textblock*}{\textwidth}(0cm,0cm)
+        %        \includegraphics[width=\textwidht]{logos/.png}
         %\end{textblock*}
-        
-
-    \end{frame}
-} % Close background bracket
-
+       
+ % Close background bracket
+\end{frame}
+}
 \section{Section 1}
-\begin{frame}{}
-
-    \begin{itemize}
-        \item Some text
-        \item Some text
-        \item more text
-    \end{itemize}
+\begin{frame}{Intro}
+	\begin{itemize}
+		\item some text
+		\item more text
+	\end{itemize}
 \end{frame}
-
 \section{Section 2}
-
-\begin{frame}{}
-
-        \begin{itemize}
-        \item Some text
-        \item Some text
-        \item more text
-    \end{itemize}
-        
+\begin{frame}{Details}
+	\begin{itemize}
+		\item some text
+		\item more text
+	\end{itemize}
 \end{frame}
-
-
-\section{Conclusions}
-\begin{frame}{}
-    \begin{itemize}
-        \item Some text
-        \item Some text
-        \item more text
-    \end{itemize}
+\section{Section 3}
+\begin{frame}{Conclusions}
+	\begin{itemize}
+		\item some text
+		\item more text
+	\end{itemize}
 \end{frame}
 
 \newcounter{totalmainframes}
