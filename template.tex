@@ -10,14 +10,13 @@
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[ 11pt, english, xcolor=dvipsnames, aspectratio=169,showframe=true]{beamer}
+\documentclass[ 10pt, english, xcolor=dvipsnames, aspectratio=169,showframe=true]{beamer}
 \usefonttheme[onlymath]{serif} %Text is beamer font, maths is serif
 % Text encoding
 \usepackage[english]{babel}
 \usepackage{physics}
 \usepackage{amsmath,amsfonts}
 \usepackage{dsfont}
-\usepackage{footbib}
 \usepackage{hyperref}
 \usepackage{stackengine}
 %\hypersetup{
@@ -118,7 +117,7 @@
       \setbeamerfont{section in head/foot}{size=\small}
       \leavevmode
       \hbox{
-      \begin{beamercolorbox}[wd=\paperwidth,ht=6ex,dp=3ex]{palette primary}
+      \begin{beamercolorbox}[wd=\paperwidth,ht=5ex,dp=2ex]{palette primary}
         \insertsectionnavigationhorizontal{\paperwidth}{}{}
       \end{beamercolorbox} 
       }
@@ -131,6 +130,7 @@
     \ifnum \theframenumber=0   % Title Frame
         %title frame: nothing   % without footline
     \else
+	%\setbeamerfont{author in head/foot}{size=\small}
         \leavevmode
         \hbox{
         \begin{beamercolorbox}[wd=.23\paperwidth,ht=2.6ex,dp=1ex,center]{palette primary}
@@ -279,15 +279,26 @@
 	\end{itemize}
 \end{frame}
 
+
+%--------------------------- BACKUP SLIDES ------------------------------------%
+%reset frame counting
 \newcounter{totalmainframes}
 \setcounter{totalmainframes}{\value{framenumber}}
-\appendix
-\section{Backup}
-\begin{frame}{}
-	\Large{\texbf{\centering{Back Up}}}
-\end{frame}
-\begin{frame}{}
+% start from 0
 
+\appendix
+\addtocounter{framenumber}{-1}
+\section{Backup}
+{
+ % This is to set local background
+    % Bicocca background has 1:1 proportion
+\usebackgroundtemplate{\tikz[remember picture,overlay] {\node[inner sep=0pt,opacity=0.2] at (current page.center)
+{\includegraphics[height=\paperheight,width=\paperwidth]{Background/Mondrian.jpg}};}}
+\begin{frame}{}
+	\centering \alert{\huge\textbf{Backup}}
+\end{frame}
+}
+\begin{frame}{}
 	Backup slides
 \end{frame}
 \end{document}
